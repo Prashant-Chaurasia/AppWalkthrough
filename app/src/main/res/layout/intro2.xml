@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_bgscreen">
+
+    <TextView
+        android:id="@+id/dummy_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_centerHorizontal="true"
+        android:text="Create your professional identity"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:textAppearance="?android:textAppearanceMedium"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dummy_tv"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginTop="70dp"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:elevation="4dp"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="65dp"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Samantha Ruth"
+                android:textStyle="normal"
+                android:layout_gravity="center"
+                android:textColor="#424242"
+                android:textAppearance="?android:textAppearanceLarge"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Actor And Model, Telugu"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textAppearance="?android:textAppearanceSmall"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="6dp"
+                android:paddingLeft="@dimen/desc_padding"
+                android:paddingRight="@dimen/desc_padding"
+                android:text="Hyderabad India"
+                android:textAlignment="center"
+                android:textColor="#bdbdbd"
+                android:textAppearance="?android:textAppearanceSmall"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_marginTop="6dp"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/btn_border"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:id="@+id/animate_tv"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:textColor="@color/dot_dark"
+            android:text="@string/connect"
+            android:textStyle="bold"
+            android:textAppearance="?android:textAppearanceMedium"/>
+
+
+    </LinearLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_below="@+id/dummy_tv"
+        android:layout_marginTop="16dp"
+        android:id="@+id/profile_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/image"
+        android:layout_centerHorizontal="true"
+        android:elevation="6dp"/>
+
+</RelativeLayout>
