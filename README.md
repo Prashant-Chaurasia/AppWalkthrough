@@ -9,7 +9,7 @@ An app walkthrough/intro developed solely for learning purpose and not to publis
 ![screenshot_20170720-001228](https://user-images.githubusercontent.com/19494189/28384203-757480d6-6ce1-11e7-9e7d-4d2d1a90cb33.png)
 ![screenshot_20170720-001233](https://user-images.githubusercontent.com/19494189/28384211-7b74380a-6ce1-11e7-81d0-9c17e452904e.png)
 
-###Note
+### Note
 This walkthrough has minsdk-23 and also this was tested on a 5" screen, not designed to work on all types of screen.
 
 
