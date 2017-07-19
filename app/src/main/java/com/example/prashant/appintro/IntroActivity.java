@@ -1,8 +1,10 @@
 package com.example.prashant.appintro;
 
 import android.animation.Animator;
+import android.animation.AnimatorSet;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -20,7 +22,11 @@ import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -31,9 +37,11 @@ public class IntroActivity extends AppCompatActivity {
     private LinearLayout dotsLayout;
     private TextView[] dots;
     private int[] layouts;
-    private Button btn_join_now,btn_join_now1, btn_sign_up;
+    private Button btn_join_now,btn_join_now1, btn_sign_in;
     private PrefManager prefManager;
     TextView animatetv;
+    ImageView stickerImage;
+    TextView msg1,msg2;
 
     ArgbEvaluator evaluator;
     int[] colorList;
@@ -59,7 +67,9 @@ public class IntroActivity extends AppCompatActivity {
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
         btn_join_now = (Button) findViewById(R.id.btn_join_now);
        // btn_join_now1 = (Button) findViewById(R.id.btn_join_now1);
-        btn_sign_up = (Button) findViewById(R.id.btn_sign_up);
+        btn_sign_in = (Button) findViewById(R.id.btn_sign_in);
+
+
 
         /*btn_join_now1 = (Button) viewPager.findViewById(R.id.btnjoinnow);*/
         // layouts of all welcome sliders
@@ -103,7 +113,7 @@ public class IntroActivity extends AppCompatActivity {
         });
 */
 
-        btn_sign_up.setOnClickListener(new View.OnClickListener() {
+        btn_sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // checking for last page
@@ -131,7 +141,7 @@ public class IntroActivity extends AppCompatActivity {
                 dots[i].setText(Html.fromHtml("&#8226;"));
             }
             dots[i].setTextSize(35);
-            dots[i].setTextColor(getColor(R.color.dot_dark));
+            dots[i].setTextColor(getColor((R.color.dot_dark)));
             dotsLayout.addView(dots[i]);
         }
 
@@ -156,44 +166,90 @@ public class IntroActivity extends AppCompatActivity {
         public void onPageSelected(int position) {
             addBottomDots(position);
 
-            if(position>0) {
-                btn_sign_up.setTextColor(getColor(R.color.btn_border));
-                if (position == 1) {
+            switch(position){
+
+                case 0:
+
+                    try{
+                        animatetv =(TextView)viewPager.getChildAt(1).findViewById(R.id.animate_tv);
+                        stickerImage = (ImageView)viewPager.getChildAt(2).findViewById(R.id.stickerImage);
+                        msg1 = (TextView)viewPager.getChildAt(2).findViewById(R.id.msg1);
+                        msg2 = (TextView)viewPager.getChildAt(2).findViewById(R.id.msg2);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    btn_join_now.setTextColor(Color.WHITE);
+                    btn_sign_in.setTextColor(getColor(R.color.dot_dark));
+                    revertToOriginal(1);
+                    revertToOriginal(2);
+                    break;
+
+                case 1:
+
+                    try{
+                        animatetv =(TextView)viewPager.getChildAt(1).findViewById(R.id.animate_tv);
+                        stickerImage = (ImageView)viewPager.getChildAt(2).findViewById(R.id.stickerImage);
+                        msg1 = (TextView)viewPager.getChildAt(2).findViewById(R.id.msg1);
+                        msg2 = (TextView)viewPager.getChildAt(2).findViewById(R.id.msg2);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    btn_sign_in.setTextColor(getColor(R.color.btn_border));
+                    revertToOriginal(2);
                     if (viewPager.getChildAt(1).findViewById(R.id.animate_tv) == null) {
                         animatetv = (TextView) findViewById(R.id.animate_tv);
                         if (animatetv != null) {
                             startAnimation();
                         }
                     } else {
-                        animatetv = (TextView) viewPager.getChildAt(1).findViewById(R.id.animate_tv);
+                        animatetv =(TextView)viewPager.getChildAt(1).findViewById(R.id.animate_tv);
                         startAnimation();
                     }
-                }
+                    break;
+                case 2:
+                    btn_sign_in.setTextColor(getColor(R.color.btn_border));
 
-                if (position != 1) {
-                    if (viewPager.getChildAt(1).findViewById(R.id.animate_tv) == null) {
-                        animatetv = (TextView) findViewById(R.id.animate_tv);
-                        if (animatetv != null) {
-                            animatetv.setText(R.string.connect);
+                    try{
+                        animatetv =(TextView)viewPager.getChildAt(1).findViewById(R.id.animate_tv);
+                        stickerImage = (ImageView)viewPager.getChildAt(2).findViewById(R.id.stickerImage);
+                        msg1 = (TextView)viewPager.getChildAt(2).findViewById(R.id.msg1);
+                        msg2 = (TextView)viewPager.getChildAt(2).findViewById(R.id.msg2);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    revertToOriginal(1);
+                    if (stickerImage == null ) {
+                        stickerImage = (ImageView) findViewById(R.id.stickerImage);
+                        if (stickerImage != null) {
+                            stickerImage.setVisibility(View.VISIBLE);
+                            msg1 = (TextView)findViewById(R.id.msg1);
+                            msg2 = (TextView)findViewById(R.id.msg2);
+                            Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.bounce);
+                            stickerImage.startAnimation(animation);
+                            msg1.setVisibility(View.VISIBLE);
+                            msg1.startAnimation(animation);
+                            msg2.setVisibility(View.VISIBLE);
+                            msg2.startAnimation(animation);
                         }
                     } else {
-                        animatetv = (TextView) viewPager.getChildAt(1).findViewById(R.id.animate_tv);
-                        animatetv.setText(R.string.connect);
+                        stickerImage.setVisibility(View.VISIBLE);
+                        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.bounce);
+                        stickerImage.startAnimation(animation);
+                        msg1.setVisibility(View.VISIBLE);
+                        msg1.startAnimation(animation);
+                        msg2.setVisibility(View.VISIBLE);
+                        msg2.startAnimation(animation);
                     }
-                }
-            }
-            else{
-                if (viewPager.getChildAt(1).findViewById(R.id.animate_tv) == null) {
-                    animatetv = (TextView) findViewById(R.id.animate_tv);
-                    if (animatetv != null) {
-                        animatetv.setText(R.string.connect);
-                    }
-                } else {
-                    animatetv = (TextView) viewPager.getChildAt(1).findViewById(R.id.animate_tv);
-                    animatetv.setText(R.string.connect);
-                }
-                btn_join_now.setTextColor(Color.WHITE);
-                btn_sign_up.setTextColor(getColor(R.color.dot_dark));
+                    break;
+
+                case 3:
+                    revertToOriginal(1);
+                    revertToOriginal(2);
+                    break;
+                default:
+
+
+
             }
 
         }
@@ -247,7 +303,6 @@ public class IntroActivity extends AppCompatActivity {
         });
         anim.start();
     }
-
     public void changeBackToOriginal(){
         int startRadius = (int)Math.hypot(animatetv.getWidth(), animatetv.getHeight());
         Animator anim = ViewAnimationUtils.createCircularReveal(animatetv, (int) animatetv.getWidth()/2, (int) animatetv.getHeight()/2, startRadius,0);
@@ -271,9 +326,43 @@ public class IntroActivity extends AppCompatActivity {
         anim.start();
     }
 
-    /**
-     * Making notification bar transparent
-     */
+    public void revertToOriginal(int position){
+        switch (position){
+            case 1:
+                btn_sign_in.setTextColor(getColor(R.color.btn_border));
+                if (animatetv == null) {
+                    animatetv = (TextView) findViewById(R.id.animate_tv);
+                    if (animatetv != null) {
+                        animatetv.setText(R.string.connect);
+                    }
+                } else {
+                    animatetv.setText(R.string.connect);
+                }
+                break;
+            case 2:
+                if (stickerImage == null) {
+                    stickerImage = (ImageView) findViewById(R.id.stickerImage);
+                    msg1 = (TextView)findViewById(R.id.msg1);
+                    msg2 = (TextView)findViewById(R.id.msg2);
+                    if (stickerImage != null) {
+                        stickerImage.setVisibility(View.INVISIBLE);
+                        msg1.setVisibility(View.INVISIBLE);
+                        msg2.setVisibility(View.INVISIBLE);
+                    }
+                } else {
+                    stickerImage.setVisibility(View.INVISIBLE);
+                    msg1.setVisibility(View.INVISIBLE);
+                    msg2.setVisibility(View.INVISIBLE);
+                }
+                break;
+            default:
+
+
+
+        }
+    }
+
+
     private void changeStatusBarColor() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
@@ -317,4 +406,5 @@ public class IntroActivity extends AppCompatActivity {
             container.removeView(view);
         }
     }
+
 }

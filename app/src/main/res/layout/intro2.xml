@@ -12,7 +12,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_centerHorizontal="true"
-        android:text="Create your professional identity"
+        android:text="@string/slide_2_toptext"
         android:textColor="@android:color/white"
         android:gravity="center"
         android:textAppearance="?android:textAppearanceMedium"

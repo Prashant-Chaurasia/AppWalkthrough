@@ -12,7 +12,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/btnsignup"
+            android:layout_above="@+id/btnsignin"
             android:background="#4e5983"
             android:layout_centerInParent="true"
             android:layout_marginLeft="35dp"
@@ -21,7 +21,7 @@
 
 
         <Button
-            android:id="@+id/btnsignup"
+            android:id="@+id/btnsignin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
@@ -54,10 +54,10 @@
         android:id="@+id/btn_join_now"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btn_sign_up"
+        android:layout_above="@+id/btn_sign_in"
         android:background="@drawable/btn_border2"
         android:layout_centerInParent="true"
-        android:text="Join Now"
+        android:text="@string/JoinNow"
         android:textSize="22sp"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
@@ -65,7 +65,7 @@
 
 
     <Button
-        android:id="@+id/btn_sign_up"
+        android:id="@+id/btn_sign_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
@@ -74,7 +74,7 @@
         android:layout_marginRight="35dp"
         android:layout_marginLeft="35dp"
         android:layout_marginBottom="@dimen/dots_margin_bottom"
-        android:text="Sign Up"
+        android:text="@string/SignIn"
         android:textSize="12sp"
         android:textColor="@color/dot_dark" />
 
