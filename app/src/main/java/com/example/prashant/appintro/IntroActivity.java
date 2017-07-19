@@ -1,17 +1,11 @@
 package com.example.prashant.appintro;
 
 import android.animation.Animator;
-import android.animation.AnimatorSet;
-import android.animation.ArgbEvaluator;
-import android.animation.ValueAnimator;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -23,7 +17,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -37,14 +30,12 @@ public class IntroActivity extends AppCompatActivity {
     private LinearLayout dotsLayout;
     private TextView[] dots;
     private int[] layouts;
-    private Button btn_join_now,btn_join_now1, btn_sign_in;
+    private Button btn_join_now, btn_sign_in;
     private PrefManager prefManager;
     TextView animatetv;
     ImageView stickerImage;
     TextView msg1,msg2;
 
-    ArgbEvaluator evaluator;
-    int[] colorList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,14 +75,6 @@ public class IntroActivity extends AppCompatActivity {
 
         // making notification bar transparent
         changeStatusBarColor();
-/*
-        final int color1 = ContextCompat.getColor(this, R.color.dot_dark);
-        final int color2 = ContextCompat.getColor(this, R.color.bg_screen2);*/
-        //final int color3 = ContextCompat.getColor(this, R.color.bg_screen4);
-
-       /* colorList = new int[]{color1, color2};*/
-
-         evaluator = new ArgbEvaluator();
 
         myViewPagerAdapter = new MyViewPagerAdapter();
         viewPager.setAdapter(myViewPagerAdapter);
@@ -103,15 +86,6 @@ public class IntroActivity extends AppCompatActivity {
                 launchHomeScreen();
             }
         });
-/*
-
-        btn_join_now1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                launchHomeScreen();
-            }
-        });
-*/
 
         btn_sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,7 +135,6 @@ public class IntroActivity extends AppCompatActivity {
     //  viewpager change listener
     ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
 
-        boolean animated = false;
         @Override
         public void onPageSelected(int position) {
             addBottomDots(position);
@@ -247,34 +220,18 @@ public class IntroActivity extends AppCompatActivity {
                     revertToOriginal(2);
                     break;
                 default:
-
-
-
             }
 
         }
-
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixel) {
 
-
-//            if(position==0&&positionOffset>0){
-//                //int colorUpdate = (Integer) evaluator.evaluate(positionOffset, colorList[position], colorList[position == 1 ? position : position + 1]);
-//
-//            }
-/*
-            if((position==0 && positionOffset>0&&positionOffset<1)||(position==2 && positionOffset>0&&positionOffset<1)){
-                animatetv.setText(R.string.connect);
-            }*/
         }
         @Override
         public void onPageScrollStateChanged(int arg0) {
-          /*  if(arg0 == viewPager.SCROLL_STATE_IDLE && viewPager.getCurrentItem()==1 && !animated ){
-
-            }*/
-
         }
     };
+
     public void startAnimation(){
         int finalRadius = (int)Math.hypot(animatetv.getWidth(), animatetv.getHeight());
         Animator anim = ViewAnimationUtils.createCircularReveal(animatetv, (int) animatetv.getWidth()/2, (int) animatetv.getHeight()/2, 0, finalRadius);
@@ -303,6 +260,7 @@ public class IntroActivity extends AppCompatActivity {
         });
         anim.start();
     }
+
     public void changeBackToOriginal(){
         int startRadius = (int)Math.hypot(animatetv.getWidth(), animatetv.getHeight());
         Animator anim = ViewAnimationUtils.createCircularReveal(animatetv, (int) animatetv.getWidth()/2, (int) animatetv.getHeight()/2, startRadius,0);
@@ -361,7 +319,6 @@ public class IntroActivity extends AppCompatActivity {
 
         }
     }
-
 
     private void changeStatusBarColor() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

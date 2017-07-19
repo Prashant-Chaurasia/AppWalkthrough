@@ -6,6 +6,6 @@
     <corners android:radius="5dp" />
     <solid android:color="#dedede" />
     <stroke
-        android:width="2dip"
+        android:width="1dip"
         android:color="@color/bg_screen1" />
 </shape>
